@@ -1,6 +1,6 @@
 # UVMHS-Nix
 
-A nix flake and docker image for [UVMHS]() development.
+A nix flake and docker image for [UVMHS](https://github.com/uvm-plaid/uvmhs) development.
 
 ## Develop Natively
 
