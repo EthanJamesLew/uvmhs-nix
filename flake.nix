@@ -1,5 +1,5 @@
 {
-  description = "A flake with specific GHC and HLS versions, including Vim";
+  description = "UVMHS Development Flake";
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
@@ -16,15 +16,20 @@
         };
         ghc = pkgs.haskell.packages.ghc964.ghc;
         hls = pkgs.haskellPackages.haskell-language-server;
-        vimPackage = vim-flake.packages.${system}.default;
-      in {
-        devShell = pkgs.mkShell {
-          buildInputs = [ ghc hls vimPackage ];
-        };
+        nvim = vim-flake.packages.${system}.default;
+        
         dockerImage = pkgs.dockerTools.buildImage {
           name = "uvmhs";
           tag = "latest";
-          contents = [ ghc hls vimPackage ];
+          contents = [ ghc hls nvim ];
+        };
+      in {
+        packages = {
+          inherit dockerImage;
+        };
+
+        devShell = pkgs.mkShell {
+          buildInputs = [ ghc hls nvim ];
         };
       });
 }
