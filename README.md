@@ -24,5 +24,5 @@ docker load < result
 
 Run the vim
 ```shell
-docker run -it -v $PWD/wd -w /wd uvmhs:latest nvim
+docker run -it -v $PWD:/wd -w /wd uvmhs:latest nvim
 ```
